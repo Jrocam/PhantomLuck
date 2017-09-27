@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/Scenes/Bandit_Camp_1A.unity
+  isLoaded: 1
+  isActive: 1
