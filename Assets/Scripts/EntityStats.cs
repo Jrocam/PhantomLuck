@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class EntityStats : MonoBehaviour {
 
-    public float _playerHealth=100;
+    public float _playerHealth = 100;
     public float _playerStr = 20;
-    public Collider _Sword;
     // Use this for initialization
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-    private void OnTriggerEnter(Collider other)
-    {
 
-        _playerHealth = _playerHealth - 20f;
+    // Update is called once per frame
+    void Update() {
+        if (_playerHealth <= 0)
+        {
+            StartCoroutine(kill());
+        }
     }
+    IEnumerator kill()
+    {
+        //Espera 0f segundos antes de morir
+        yield return new WaitForSeconds(0f); 
+        Destroy(this.gameObject);
+    }
+
 }
