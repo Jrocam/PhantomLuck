@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour {
     public GameObject Sword;
     public float walkSpeed = 2f;
     public float runSpeed = 5f;
+	public float rollSpeed = 5f;
+	private float addRoll = 0f;
 
     public float turnSmoothTime = 0.2f;
     float turnSmoothVelocity;
@@ -23,6 +25,7 @@ public class PlayerController : MonoBehaviour {
     private Vector3 moveInput;
     private Animator _panimator;
     private Vector3 rotateInput;
+	private float _rollInput;
 
     Transform cameraT;
 
@@ -48,7 +51,26 @@ public class PlayerController : MonoBehaviour {
         if (controller.isGrounded){
             moveSpeedY = 0;
         }
-        
+		//Está Rolling Dodging
+		_rollInput = Input.GetAxisRaw("Jump");
+
+		if (_rollInput > 0.1 && Input.GetButtonDown("Jump"))
+		{
+			if (!_panimator.GetCurrentAnimatorStateInfo(0).IsName("Sprinting Forward Roll"))
+			{
+				addRoll = rollSpeed;
+				_panimator.SetFloat("Roll", _rollInput);
+			}
+		}
+		else
+		{
+			if (addRoll > 0)
+			{
+				addRoll -= 1f;
+				_panimator.SetFloat("Roll", 0);
+			}
+		}
+
 
         //Está atacando
         if (_panimator.GetCurrentAnimatorStateInfo(0).IsName("slash4"))
@@ -63,7 +85,7 @@ public class PlayerController : MonoBehaviour {
         }
         //Actually move the player
         
-        currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVelocity, speedSmoothTime);
+		currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed + addRoll, ref speedSmoothVelocity, speedSmoothTime);
         Vector3 velocity = transform.forward * currentSpeed + Vector3.up * moveSpeedY;
         controller.Move(velocity * Time.deltaTime);
 

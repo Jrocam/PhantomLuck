@@ -1,0 +1,16 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\EntityStats.cs">
+    <Files>
+      <File FileName="Assets\Scripts\EntityStats.cs" Line="23" Column="32" />
+      <File FileName="Assets\Scripts\EnemyLogic.cs" Line="5" Column="28" />
+      <File FileName="Assets\Scripts\PlayerController.cs" Line="95" Column="30" />
+      <File FileName="Assets\Scripts\DisableOtherPlayers.cs" Line="4" Column="46" />
+      <File FileName="Assets\Scripts\CameraFollow.cs" Line="15" Column="23" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

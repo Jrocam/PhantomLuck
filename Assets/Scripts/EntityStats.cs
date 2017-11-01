@@ -6,6 +6,7 @@ public class EntityStats : MonoBehaviour {
 
     public float _playerHealth = 100;
     public float _playerStr = 20;
+
     // Use this for initialization
 
     // Update is called once per frame
@@ -20,6 +21,7 @@ public class EntityStats : MonoBehaviour {
         //Espera 0f segundos antes de morir
         yield return new WaitForSeconds(0f); 
         Destroy(this.gameObject);
+
     }
 
 }
