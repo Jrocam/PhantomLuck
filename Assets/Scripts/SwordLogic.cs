@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class SwordLogic : MonoBehaviour {
+
+public class SwordLogic : NetworkBehaviour {
     public float maxRayDistance = 10;
     public LayerMask activeLayers;
+    public int golpe = 0; //controlar el ray
+    public GameObject pbody; //cuerpo con el network identity
 
     private void FixedUpdate()
     {
@@ -13,14 +17,29 @@ public class SwordLogic : MonoBehaviour {
         Debug.DrawRay(transform.position,transform.up * maxRayDistance, Color.red);
         foreach(RaycastHit hit in hits)
         {
-            if (hit.transform.gameObject.tag.Equals("Enemy"))
+            if (golpe == 0 && !pbody.GetComponent<DisableOtherPlayers>().isLocalPlayer)
             {
                 GameObject otro = hit.transform.gameObject;
                 Debug.Log("HIT ThE ENEMY");
                 Debug.DrawLine(hit.point, hit.point + transform.up * maxRayDistance, Color.green);
                 float vida_otro = otro.gameObject.GetComponent<EntityStats>()._playerHealth;
-                otro.gameObject.GetComponent<EntityStats>()._playerHealth = vida_otro - 100f;
+                CmdSwordSlash(vida_otro,otro);
+                StartCoroutine(OneHit());
             }
         }
+    }
+
+    [Command]
+    void CmdSwordSlash(float health, GameObject otro)
+    {
+        otro.gameObject.GetComponent<EntityStats>()._playerHealth = health - 10f;
+    }
+
+    IEnumerator OneHit()
+    {
+        //Espera 0f segundos antes de morir
+        golpe = 1;
+        yield return new WaitForSeconds(1f);
+        golpe = 0;
     }
 }

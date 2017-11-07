@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : NetworkBehaviour {
 
     public GameObject Sword;
     public float walkSpeed = 2f;
@@ -40,7 +41,6 @@ public class PlayerController : MonoBehaviour {
     }
 	// Update is called once per frame
 	void Update () {
-
         //MOVIMIENTO PERSONAJE(Controller) 
         Vector2 input = new Vector2(0f, Input.GetAxisRaw("Vertical"));
         Vector2 inputDir = input.normalized;

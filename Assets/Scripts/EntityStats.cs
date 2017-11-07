@@ -1,11 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class EntityStats : MonoBehaviour {
+public class EntityStats : NetworkBehaviour {
 
-    public float _playerHealth = 100;
-    public float _playerStr = 20;
+    private const float _playerMaxHealth = 50f;
+    public RectTransform healthBar;
+
+    [SyncVar(hook ="OnChangeHealth")]
+    public float _playerHealth = _playerMaxHealth;
+
+    public float _playerStr = 20f;
 
     // Use this for initialization
 
@@ -23,5 +30,11 @@ public class EntityStats : MonoBehaviour {
         Destroy(this.gameObject);
 
     }
+
+    void OnChangeHealth(float _playerHealth)
+    {
+        healthBar.sizeDelta = new Vector2(_playerHealth, healthBar.sizeDelta.y);
+    }
+
 
 }
