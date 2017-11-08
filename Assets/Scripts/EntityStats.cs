@@ -12,7 +12,7 @@ public class EntityStats : NetworkBehaviour {
     [SyncVar(hook ="OnChangeHealth")]
     public float _playerHealth = _playerMaxHealth;
 
-    public float _playerStr = 20f;
+	public float _playerStr = 20f;
 
     // Use this for initialization
 

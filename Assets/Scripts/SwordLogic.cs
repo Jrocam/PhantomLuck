@@ -9,7 +9,12 @@ public class SwordLogic : NetworkBehaviour {
     public LayerMask activeLayers;
     public int golpe = 0; //controlar el ray
     public GameObject pbody; //cuerpo con el network identity
+    public NetworkInstanceId networkid;
 
+    private void Start()
+    {
+        networkid = pbody.GetComponent<NetworkIdentity>().netId;
+    }
     private void FixedUpdate()
     {
         Ray ray = new Ray(transform.position,transform.up); 
@@ -17,15 +22,19 @@ public class SwordLogic : NetworkBehaviour {
         Debug.DrawRay(transform.position,transform.up * maxRayDistance, Color.red);
         foreach(RaycastHit hit in hits)
         {
-            if (golpe == 0 && !pbody.GetComponent<DisableOtherPlayers>().isLocalPlayer)
+            //Debug.Log("HITIN SEMTHING?");
+            if (golpe == 0 && !pbody.GetComponent<NetworkIdentity>().isLocalPlayer)
             {
                 GameObject otro = hit.transform.gameObject;
-                Debug.Log("HIT ThE ENEMY");
+                Debug.Log("HITeD OThER");
                 Debug.DrawLine(hit.point, hit.point + transform.up * maxRayDistance, Color.green);
                 float vida_otro = otro.gameObject.GetComponent<EntityStats>()._playerHealth;
                 CmdSwordSlash(vida_otro,otro);
                 StartCoroutine(OneHit());
-            }
+            }/*else if (pbody.GetComponent<NetworkIdentity>().isLocalPlayer)
+            {
+                Debug.Log("HET YERSELF");
+            }*/
         }
     }
 
