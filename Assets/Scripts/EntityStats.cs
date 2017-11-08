@@ -20,15 +20,20 @@ public class EntityStats : NetworkBehaviour {
     void Update() {
         if (_playerHealth <= 0)
         {
-            StartCoroutine(kill());
+            Cmdkill();
         }
     }
-    IEnumerator kill()
-    {
-        //Espera 0f segundos antes de morir
-        yield return new WaitForSeconds(0f); 
-        Destroy(this.gameObject);
 
+    [Command]
+    public void Cmdkill()
+    {
+        Destroy(this.gameObject);
+    }
+
+    [Command]
+    public void CmdTakeDamage(float daño)
+    {
+        this._playerHealth = _playerHealth - daño;
     }
 
     void OnChangeHealth(float _playerHealth)

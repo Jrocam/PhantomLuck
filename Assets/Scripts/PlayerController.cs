@@ -36,8 +36,8 @@ public class PlayerController : NetworkBehaviour {
     void Start()
     {
         _panimator = GetComponent<Animator>();
-        Sword.SetActive(false);
         controller = GetComponent<CharacterController>();
+
     }
 	// Update is called once per frame
 	void Update () {
@@ -75,12 +75,13 @@ public class PlayerController : NetworkBehaviour {
         //Está atacando
         if (_panimator.GetCurrentAnimatorStateInfo(0).IsName("slash4"))
         {
-            Sword.SetActive(true);
+
+            Sword.GetComponent<SwordLogic>().Atacando();
             targetSpeed = walkSpeed * inputDir.magnitude;
         }
         else
         {
-            Sword.SetActive(false);
+            
             targetSpeed = runSpeed* inputDir.magnitude;
         }
         //Actually move the player

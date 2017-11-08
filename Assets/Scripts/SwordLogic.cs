@@ -1,47 +1,48 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
+//using UnityEngine.Networking;
 
 
-public class SwordLogic : NetworkBehaviour {
+public class SwordLogic : MonoBehaviour {
     public float maxRayDistance = 10;
     public LayerMask activeLayers;
     public int golpe = 0; //controlar el ray
     public GameObject pbody; //cuerpo con el network identity
-    public NetworkInstanceId networkid;
+    //public NetworkInstanceId networkid;
 
     private void Start()
     {
-        networkid = pbody.GetComponent<NetworkIdentity>().netId;
+        //networkid = pbody.GetComponent<NetworkIdentity>().netId;
     }
     private void FixedUpdate()
     {
-        Ray ray = new Ray(transform.position,transform.up); 
+        
+    }
+
+    public void Atacando()
+    {
+        Ray ray = new Ray(transform.position, transform.up);
         RaycastHit[] hits = Physics.RaycastAll(ray, maxRayDistance, activeLayers);
-        Debug.DrawRay(transform.position,transform.up * maxRayDistance, Color.red);
-        foreach(RaycastHit hit in hits)
+        Debug.DrawRay(transform.position, transform.up * maxRayDistance, Color.red);
+        foreach (RaycastHit hit in hits)
         {
-            //Debug.Log("HITIN SEMTHING?");
-            if (golpe == 0 && !pbody.GetComponent<NetworkIdentity>().isLocalPlayer)
+            if (golpe == 0 && hit.transform.gameObject != pbody)
             {
                 GameObject otro = hit.transform.gameObject;
                 Debug.Log("HITeD OThER");
                 Debug.DrawLine(hit.point, hit.point + transform.up * maxRayDistance, Color.green);
                 float vida_otro = otro.gameObject.GetComponent<EntityStats>()._playerHealth;
-                CmdSwordSlash(vida_otro,otro);
+                CmdSwordSlash(vida_otro, otro);
                 StartCoroutine(OneHit());
-            }/*else if (pbody.GetComponent<NetworkIdentity>().isLocalPlayer)
-            {
-                Debug.Log("HET YERSELF");
-            }*/
+            }
         }
     }
 
-    [Command]
-    void CmdSwordSlash(float health, GameObject otro)
+    //[Command]
+    void CmdSwordSlash(float daño, GameObject otro)
     {
-        otro.gameObject.GetComponent<EntityStats>()._playerHealth = health - 10f;
+        otro.GetComponent<EntityStats>().CmdTakeDamage(pbody.GetComponent<EntityStats>()._playerStr);
     }
 
     IEnumerator OneHit()
