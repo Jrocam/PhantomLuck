@@ -669,6 +669,7 @@ GameObject:
   - component: {fileID: 223595922144399930}
   - component: {fileID: 114131301206216138}
   - component: {fileID: 114803532184411138}
+  - component: {fileID: 114466450806856572}
   m_Layer: 5
   m_Name: HealthDisplay
   m_TagString: Untagged
@@ -2392,6 +2393,38 @@ MonoBehaviour:
     i15: 254
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &114466450806856572
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1572772672846800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 112
+    i1: 214
+    i2: 255
+    i3: 212
+    i4: 141
+    i5: 163
+    i6: 82
+    i7: 84
+    i8: 58
+    i9: 153
+    i10: 131
+    i11: 235
+    i12: 199
+    i13: 2
+    i14: 24
+    i15: 254
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114550203242571152
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2811,7 +2844,7 @@ Canvas:
   m_GameObject: {fileID: 1572772672846800}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -2829,9 +2862,9 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1572772672846800}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children:
   - {fileID: 224707937023387114}
   m_Father: {fileID: 4877478556775134}
@@ -2839,9 +2872,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 1.742}
+  m_SizeDelta: {x: 645, y: 366}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224459317016753776
 RectTransform:
   m_ObjectHideFlags: 1

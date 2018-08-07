@@ -9,7 +9,7 @@ public class EntityStats : NetworkBehaviour {
     private const float _playerMaxHealth = 50f;
     public RectTransform healthBar;
 
-    [SyncVar(hook ="OnChangeHealth")]
+    [SyncVar(hook ="CmdOnChangeHealth")]
     public float _playerHealth = _playerMaxHealth;
 
 	public float _playerStr = 20f;
@@ -35,8 +35,8 @@ public class EntityStats : NetworkBehaviour {
     {
         this._playerHealth = _playerHealth - daño;
     }
-
-    void OnChangeHealth(float _playerHealth)
+    [Command]
+    void CmdOnChangeHealth(float _playerHealth)
     {
         healthBar.sizeDelta = new Vector2(_playerHealth, healthBar.sizeDelta.y);
     }
